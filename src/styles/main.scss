@@ -25,11 +25,16 @@
   .pokedex_cards-container {
     display: flex;
     width: 900px;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
     .pokedex_card {
       width: 250px;
       height: 350px;
       background: white;
+      margin-top: 2%;
+      &:not(last-child){
+        margin-right: 2%;
+      }
       .pokedex_card-img-container {
         width: 100%;
         height: 150px;

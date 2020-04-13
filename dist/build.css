@@ -67,11 +67,15 @@ table {
   .container .pokedex_cards-container {
     display: flex;
     width: 900px;
-    justify-content: space-between; }
+    justify-content: center;
+    flex-wrap: wrap; }
     .container .pokedex_cards-container .pokedex_card {
       width: 250px;
       height: 350px;
-      background: white; }
+      background: white;
+      margin-top: 2%; }
+      .container .pokedex_cards-container .pokedex_card:not(last-child) {
+        margin-right: 2%; }
       .container .pokedex_cards-container .pokedex_card .pokedex_card-img-container {
         width: 100%;
         height: 150px;
