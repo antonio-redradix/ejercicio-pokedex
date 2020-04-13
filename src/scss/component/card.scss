@@ -1,0 +1,84 @@
+.card {
+    border-radius: 5px;
+    margin: 10px;
+    transition: box-shadow .8s ease-in-out;
+    width: calc(100% / 3 - 20px);
+
+    &:hover {
+        box-shadow: 0 0 50px $green;
+
+        .card__asset {
+            transform: scale(1.2);
+        }
+    }
+
+    &__image {
+        background: $gray;
+        padding: 20px 0;
+        position: relative;
+        text-align: center;
+    }
+
+    &__asset {
+        transition: transform .8s ease-in-out;
+    }
+
+    &__id {
+        background: darken($gray, 10%);
+        bottom: 0;
+        color: $black;
+        font-family: $primary-font;
+        font-size: 10px;
+        padding: 5px 10px;
+        position: absolute;
+    }
+
+    &__info {
+        background: $white;
+        padding: 20px;
+    }
+
+    &__name {
+        color: $black;
+        font-family: $primary-font;
+    }
+
+    &__types {
+        display: flex;
+        margin: 15px 0;
+    }
+
+    &__tag {
+        background-color: $gray;
+        border-radius: 5px;
+        font-family: $secondary-font;
+        font-size: 10px;
+        list-style: none;
+        margin-right: 5px;
+        padding: 5px 10px;
+        text-transform: uppercase;
+        transition: background-color .8s ease-in-out;
+
+        &:last-of-type {
+            margin-right: 0;
+        }
+
+        &:hover {
+            background-color: darken($gray, 10%);
+            cursor: pointer;
+        }
+    }
+
+    &__evolution {
+        border-left: 3px solid $black;
+        padding-left: 10px;
+        font-family: $primary-font;
+
+        &__title {
+            font-weight: 300;
+            font-size: 15px;
+        }
+    }
+
+
+}
