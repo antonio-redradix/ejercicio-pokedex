@@ -1,0 +1,54 @@
+body {
+  background-color: darkcyan;
+}
+
+input {
+  height: 40px;
+  width: 500px;
+  align-items: center;
+  text-align: center;
+  font-size: 20px;
+}
+
+#estructura {
+  width: 600px;
+  height: 600px;
+  padding: 20px;
+}
+#estructura .pok1 {
+  background-color: #DFDFDF;
+  width: 200px;
+  height: 150px;
+}
+#estructura .pok1 #pokemon {
+  margin-left: 49px;
+  margin-top: 20px;
+}
+#estructura .pok1 #inputpok {
+  width: 40px;
+  height: 20px;
+  background-color: #D0CCC9;
+  border: none;
+  position: absolute;
+  margin-top: 128px;
+  margin-left: -145px;
+}
+#estructura .pok2 {
+  background-color: white;
+  width: 200px;
+  height: 150px;
+}
+#estructura .pok2 #nombrepokemon {
+  width: 104px;
+  border: hidden;
+}
+#estructura .pok2 .tipo {
+  width: 40px;
+  height: 10px;
+  font-size: 13px;
+  border-radius: 9px;
+  display: inline;
+  margin-left: 10px;
+}
+
+/*# sourceMappingURL=main.css.map */

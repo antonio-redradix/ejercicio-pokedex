@@ -3,35 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokedex</title>
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Open+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Document</title>
 </head>
 <body>
-    <section class="main">
-        <header class="header">
-        </header>
-        <section class="pokedex">
-            <article class="card card--hidden">
-                <section class="card__image">
-                    <img id="cardAsset" class="card__asset" src="./src/images/pokemon.jpg" alt="" width="80" height="80">
-                    <div class="card__id">
-                        <span>ID / <span id="cardId">1</span></span>
-                    </div>
-                </section>
-                <section class="card__info">
-                    <h3 id="cardName" class="card__name">Bulbasaur</h3>
-                    <nav class="card__types">
-                        <li class="card__tag">poison</li>
-                        <li class="card__tag">grass</li>
-                    </nav>
-                    <div class="card__evolution">
-                        <p class="card__evolution__title">Evoluciona de:</p>
-                        <h4 id="cardEvolutionName" class="card__evolution__name">bulbasaur</h4>
-                    </div>
-                </section>
-            </article>
-        </section>
-    </section>
+    <input type="text" id="fname" name="fname" value="Filtra un pokemon por nombre...">
+    <div id="estructura">
+        <div class="pok1">
+            <img src="C:\Users\Veronica\Desktop\cursoNorthCamp\workspace\javascript\pokemonapi\img\1.png" alt="" id="pokemon">
+            <input type="text" id="inputpok">
+        </div>
+        <div class="pok2">
+            <input type="text" id="nombrepokemon" value="Bulbasaur">
+            <br>
+            <input type="text" class="tipo" value="Poison">
+            <input type="text" class="tipo" value="Crass">
+            <!--<input type="text" id="evolucion">-->
+        </div>
+    </div>
+    <script src="js/index.js"></script>
+
 </body>
 </html>
