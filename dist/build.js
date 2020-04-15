@@ -115,9 +115,133 @@ Object(_main__WEBPACK_IMPORTED_MODULE_0__["main"])();
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "main", function() { return main; });
+var template = document.querySelector('.card');
+
+function addCard(id, name, types, urlImage) {
+  /*CONTROL GET DATA
+  console.log('ID ',id)
+  console.log('NAME ',id)
+  console.log('TYPES ',types)
+  console.log('IMAGE ',urlImage)
+  */
+  var clone = template.cloneNode(true); //id
+
+  var codeCard = clone.querySelector('.code');
+  codeCard.innerHTML = "ID/" + id; //name
+
+  var nameCard = clone.querySelector('.name-pokemon');
+  nameCard.innerHTML = name; //type
+
+  var typeCard = clone.querySelector('.type');
+
+  if (types.includes(',')) {
+    var typesPokemon = types.split(',');
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = typesPokemon[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var key = _step.value;
+        var node = document.createElement('span');
+        var nodeWithContent = node.innerHTML = key.toUpperCase();
+        typeCard.appendChild(node);
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return != null) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+  } else {
+    var _node = document.createElement('span');
+
+    var _nodeWithContent = _node.innerHTML = types.toUpperCase();
+
+    typeCard.appendChild(_node);
+  } //image
+
+
+  var imageCard = clone.querySelector('img');
+  imageCard.setAttribute('src', urlImage); //show card clone
+
+  clone.classList.remove('hidden');
+  var containerCards = document.querySelector('#cards');
+  containerCards.appendChild(clone);
+  return clone;
+}
+
 function main() {
   // code goes here
-  console.log('Hello world');
+
+  /*
+  let card = addCard()
+  addCard()
+  addCard()
+  */
+  var limit = 10;
+  var urlList = 'https://pokeapi.co/api/v2/pokemon?limit=' + limit;
+  var urlBase = 'https://pokeapi.co/api/v2/pokemon/';
+  fetch(urlList).then(function (response) {
+    response.json().then(function (data) {
+      var listPokemons = data.results;
+
+      for (var i = 0; i < listPokemons.length; i++) {
+        urlBase = 'https://pokeapi.co/api/v2/pokemon/' + listPokemons[i].name + '/';
+        fetch(urlBase).then(function (response) {
+          response.json().then(function (dataPokemon) {
+            console.log(dataPokemon);
+            var namePokemon = dataPokemon.name;
+            var imagePokemon = dataPokemon.sprites.front_default;
+            var idPokemon = dataPokemon.id;
+            var typePokemon = dataPokemon.types; //.type['name'] //array
+
+            var listTypeAux = [];
+
+            if (typePokemon.length > 1) {
+              var _iteratorNormalCompletion2 = true;
+              var _didIteratorError2 = false;
+              var _iteratorError2 = undefined;
+
+              try {
+                for (var _iterator2 = typePokemon[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                  var key = _step2.value;
+                  listTypeAux.push(key.type['name']);
+                }
+              } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
+              } finally {
+                try {
+                  if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                    _iterator2.return();
+                  }
+                } finally {
+                  if (_didIteratorError2) {
+                    throw _iteratorError2;
+                  }
+                }
+              }
+            } else {
+              listTypeAux.push(typePokemon[0].type['name']);
+            }
+
+            var classPokemon = listTypeAux.join(',');
+            console.log(classPokemon);
+            addCard(idPokemon, namePokemon, classPokemon, imagePokemon);
+          });
+        });
+      }
+    });
+  });
 }
 
 /***/ }),
