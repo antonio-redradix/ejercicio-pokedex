@@ -88,6 +88,10 @@ body{
       font-size: 14px;
       font-family: oswald;
     }
+
+    .type-pokemon .hidden{
+      display: none;
+    }
 }
 
 .evoluciona{
@@ -107,4 +111,8 @@ body{
       font-size: 18px;
       margin-top: 4px;
     }
+}
+
+.hidden{
+  display:none;
 }

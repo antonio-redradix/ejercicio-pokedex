@@ -115,9 +115,38 @@ Object(_main__WEBPACK_IMPORTED_MODULE_0__["main"])();
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "main", function() { return main; });
+var template = document.querySelector('.card');
+
+function addCard(data) {
+  var card = template.cloneNode(true);
+  document.querySelector('.container').appendChild(card);
+  card.classList.remove('hidden'); // rellenar
+
+  var nameNode = card.querySelector('.name-pokemon');
+  nameNode.innerHTML = data.name;
+  var imgNode = card.querySelector('.card-img');
+  imgNode.src = data.sprites.front_default;
+  console.log('id', data.id);
+  var idNode = card.querySelector('.card-id');
+  idNode.innerHTML = data.id;
+  var typeNode = card.querySelector('.type-pokemon');
+  var typeContainer = card.querySelector('.types-pokemon');
+  data.types.forEach(function (type) {
+    var clone = typeNode.cloneNode(true);
+    clone.innerHTML = type.type.name;
+    typeContainer.appendChild(clone);
+  });
+  typeContainer.children[0].remove();
+  return card;
+}
+
 function main() {
-  // code goes here
-  console.log('Hello world');
+  fetch('https://pokeapi.co/api/v2/pokemon/bulbasaur/').then(function (response) {
+    return response.json();
+  }).then(function (data) {
+    console.log(data);
+    addCard(data);
+  });
 }
 
 /***/ }),
