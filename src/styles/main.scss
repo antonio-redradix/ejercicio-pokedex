@@ -7,29 +7,28 @@ body{
 .container{
   width: 950px;
   position: absolute;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%);
+  margin-top: 50px;
 }
 
-.filter{
+.filter-input{
   text-align: center;
   background-color: rgb(255, 255, 255);
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px;
+  width: 600px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-
-    p{
-      color: rgb(136, 136, 136);
-      font-family: lato;
-    }
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
 }
 
 .card{
   width: 200px; 
   height: 300px;
   box-sizing: border-box;
-  margin-top: 30px;
+  margin-top: 25px;
+  margin-left: 25px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
   display: inline-block;
 }
