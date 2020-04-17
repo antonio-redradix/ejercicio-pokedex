@@ -10,28 +10,28 @@
 <body>
     <section class="main">
         <header class="header">
+            <input type="text" id="search" placeholder="Search your pokemon...">
         </header>
-        <section class="pokedex">
+        <main class="main-container">
             <article class="card card--hidden">
                 <section class="card__image">
-                    <img id="cardAsset" class="card__asset" src="./src/images/pokemon.jpg" alt="" width="80" height="80">
+                    <img id="cardAsset" class="card__asset" src="" alt="" width="80" height="80">
                     <div class="card__id">
-                        <span>ID / <span id="cardId">1</span></span>
+                        <span>ID / <span id="cardId"></span></span>
                     </div>
                 </section>
                 <section class="card__info">
-                    <h3 id="cardName" class="card__name">Bulbasaur</h3>
+                    <h3 id="cardName" class="card__name"></h3>
                     <nav class="card__types">
-                        <li class="card__tag">poison</li>
-                        <li class="card__tag">grass</li>
+                        <li id="cardTag" class="card__tag card__tag--hidden"></li>
                     </nav>
                     <div class="card__evolution">
                         <p class="card__evolution__title">Evoluciona de:</p>
-                        <h4 id="cardEvolutionName" class="card__evolution__name">bulbasaur</h4>
+                        <h4 id="cardEvolutionName" class="card__evolution__name"></h4>
                     </div>
                 </section>
             </article>
-        </section>
+        </main>
     </section>
 </body>
 </html>
