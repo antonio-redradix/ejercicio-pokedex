@@ -51,7 +51,7 @@ table {
 
 .container {
   background: #fee82d;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   display: flex;
   flex-wrap: wrap;
@@ -93,12 +93,13 @@ table {
       .container .pokedex_cards-container .pokedex_card .pokedex_card-dates-container {
         padding: 10%; }
         .container .pokedex_cards-container .pokedex_card .pokedex_card-dates-container .pokedex_card-dates-title {
-          font-size: 25px; }
+          font-size: 25px;
+          text-transform: capitalize; }
         .container .pokedex_cards-container .pokedex_card .pokedex_card-dates-container .pokedex_card-pills-container {
           display: flex;
           flex-wrap: wrap;
           margin-top: 2%; }
-          .container .pokedex_cards-container .pokedex_card .pokedex_card-dates-container .pokedex_card-pills-container .pokedex_card-pills {
+          .container .pokedex_cards-container .pokedex_card .pokedex_card-dates-container .pokedex_card-pills-container .pokedex_card-pill {
             color: #dfdfdf;
             border: 1px solid #dfdfdf;
             padding: 2%;
@@ -107,6 +108,8 @@ table {
             font-size: 10px;
             margin-right: 2%;
             margin-top: 2%; }
+  .container .none {
+    display: none; }
 
 
 /*# sourceMappingURL=build.css.map*/

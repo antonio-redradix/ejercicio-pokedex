@@ -7,7 +7,7 @@
 
 .container {
   background: #fee82d;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   display: flex;
   flex-wrap: wrap;
@@ -55,12 +55,13 @@
         padding: 10%;
         .pokedex_card-dates-title{
           font-size: 25px;
+          text-transform: capitalize;
         }
         .pokedex_card-pills-container{
           display: flex;
           flex-wrap: wrap;
           margin-top: 2%;
-          .pokedex_card-pills{
+          .pokedex_card-pill{
             color: #dfdfdf;
             border: 1px solid #dfdfdf;
             padding: 2%;
@@ -73,5 +74,8 @@
         }
       }
     }
+  }
+  .none{
+    display: none;
   }
 }
