@@ -1,6 +1,9 @@
 @import './global/typhography';
 @import './global/colors';
 
+@import './layout/header';
 @import './layout/app';
 @import './layout/pokedex';
+
+@import './component/input';
 @import './component/card';
