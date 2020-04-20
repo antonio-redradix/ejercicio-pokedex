@@ -1,56 +1,80 @@
-// Punto de entrada de SCSS
-
 import '../scss/main.scss';
 
-// Declaración de las variables necesarias
+const template = document.querySelector('.card')
 
-let pokedex = document.createElement('section');
+let cardData = []
 
-let mainContainer = document.querySelector('.main-container');
+// pinta todos los pokemons de cardData
 
-mainContainer.appendChild(pokedex);
-
-pokedex.classList.add('pokedex');
-
-let card = document.querySelector('.card');
-
-let tagContainer = card.querySelector('.card__types');
-
-let tag = card.querySelector('.card__tag');
-
-// Función que pinta la card del Pokemon
-
-const paintPokemon = () => {
-    let clone = card.cloneNode(true);
-    pokedex.appendChild(clone);
-    clone.classList.remove('card--hidden');
+function renderPokemons(){
+    cardData.forEach(data => {
+        addCard(data)
+    })
 }
 
-// Conectamos con la API y mostramos los datos
+function addCard(data){
+    const card = template.cloneNode(true)
+    document.querySelector('.main-container').appendChild(card)
+    card.classList.remove('card--hidden')
 
-const connectApi = () => {
-    let url = `https://pokeapi.co/api/v2/pokemon/bulbasaur`;
+    let nameNode = card.querySelector('.card__name')
+    nameNode.innerHTML = data.name
 
-    fetch(url)
-    .then(response => {
-        response.json()
-        .then(data => {
-            
-            card.querySelector('#cardAsset').setAttribute('src', data.sprites.front_default);
-            card.querySelector('#cardId').innerHTML = data.id;
-            card.querySelector('#cardName').innerHTML = data.name;
+    let imgNode = card.querySelector('.card__asset')
+    imgNode.src = data.sprites.front_default
 
-            data.types.forEach(type =>{
-                let clone = tag.cloneNode(true);
-                clone.innerHTML = type.type.name;
-                tagContainer.appendChild(clone);
-                clone.classList.remove('card__tag--hidden');
-            });
+    let idNode = card.querySelector('.card__id')
+    idNode.innerHTML = data.id
 
-            paintPokemon();
-        })
+    let typeContainer = card.querySelector('.card__types')
+    let typeNode = card.querySelector('.card__tag')
+    
+    data.types.forEach(type => {
+        let clone = typeNode.cloneNode(true)
+        clone.innerHTML = type.type.name
+        typeContainer.appendChild(clone)
+        clone.classList.remove('card__tag--hidden');
     })
 
+    return card
 }
 
-connectApi();
+
+fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
+.then(response => response.json())
+    .then(data => {
+    for(let pokemon of data.results){
+        fetch(pokemon.url)
+            .then(response => response.json())
+            .then(pokemonData => {
+                cardData.push(pokemonData)
+                if(cardData.length === data.results.length){
+                    // Ordenamos por id los pokemon antes de mostrarlos
+                    for(let i of cardData) {
+                        const order = (a,b) => {
+                            if(a.id > b.id) {
+                                return 1
+                            }
+                            else {
+                                return -1
+                            }
+                        }
+                        
+                        cardData.sort(order);
+                    }
+
+                    renderPokemons();
+                }
+            })
+    }
+})
+
+// Filtrado de pokemons
+let searchInput = document.querySelector('#search');
+
+const searchPokemon = () => {
+    let searchInputValue = searchInput.value
+    console.log(searchInputValue);
+}
+
+searchInput.onkeyup = searchPokemon;

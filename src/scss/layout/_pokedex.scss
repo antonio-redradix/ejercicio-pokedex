@@ -1,4 +1,5 @@
-.pokedex {
-    display: flex;
-    flex-wrap: wrap;
+.main-container {
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    gap: 10px;
 }
