@@ -1,14 +1,15 @@
 .card {
     border-radius: 5px;
     transition: box-shadow .8s ease-in-out;
-
+    
     &--hidden {
         display: none;
     }
 
     &:hover {
         box-shadow: 0 0 50px $green;
-
+        cursor: pointer;
+        
         .card__asset {
             transform: scale(1.2);
         }
@@ -85,6 +86,4 @@
             font-size: 15px;
         }
     }
-
-
 }

@@ -27,14 +27,12 @@ const clearPokedex = () => {
 searchInput.onkeyup = searchPokemon;
 
 // pinta todos los pokemons de cardData
-
-function renderPokemons(pokemons){
+const renderPokemons = (pokemons) => {
     pokemons.forEach(data => {
         addCard(data)
     })
 }
-
-function addCard(data){
+const addCard = (data) => {
     const card = template.cloneNode(true)
     document.querySelector('.main-container').appendChild(card)
     card.classList.remove('card--hidden')
@@ -58,6 +56,18 @@ function addCard(data){
         clone.classList.remove('card__tag--hidden');
     })
 
+    
+    const showIndividualPokemon = () => {
+        clearPokedex();
+        document.querySelector('.main-container').innerHTML += `<div style="text-align: center">
+                                                                    <img src="${data.sprites.front_default}">
+                                                                    <h3>${data.name}</h3>
+                                                                </div>`;
+    }
+
+    card.onclick = showIndividualPokemon;
+    
+
     return card
 }
 
@@ -80,7 +90,7 @@ const allPokemonLoader = () => {
 }
 
 
-fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
+fetch('https://pokeapi.co/api/v2/pokemon?limit=50')
 .then(response => response.json())
     .then(data => {
     for(let pokemon of data.results){
