@@ -1,13 +1,35 @@
 import '../scss/main.scss';
 
+let cardData = [];
+
 const template = document.querySelector('.card')
 
-let cardData = []
+// Filtrado de pokemons
+let searchInput = document.querySelector('#search');
+
+const searchPokemon = () => {
+    const filtered = cardData.filter(pokemon => {
+        if(pokemon.name.includes(searchInput.value)) {
+           return true;
+       }
+       else {
+           return false;
+       }
+    });
+    clearPokedex();
+    renderPokemons(filtered);
+}
+
+const clearPokedex = () => {
+    document.querySelector('.main-container').innerHTML = '';
+}
+
+searchInput.onkeyup = searchPokemon;
 
 // pinta todos los pokemons de cardData
 
-function renderPokemons(){
-    cardData.forEach(data => {
+function renderPokemons(pokemons){
+    pokemons.forEach(data => {
         addCard(data)
     })
 }
@@ -39,6 +61,24 @@ function addCard(data){
     return card
 }
 
+const allPokemonLoader = () => {
+    // Ordenamos por id los pokemon antes de mostrarlos
+    for(let i of cardData) {
+        const order = (a,b) => {
+            if(a.id > b.id) {
+                return 1
+            }
+            else {
+                return -1
+            }
+        }
+        
+        cardData.sort(order);
+    }
+
+    renderPokemons(cardData);
+}
+
 
 fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
 .then(response => response.json())
@@ -49,32 +89,12 @@ fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
             .then(pokemonData => {
                 cardData.push(pokemonData)
                 if(cardData.length === data.results.length){
-                    // Ordenamos por id los pokemon antes de mostrarlos
-                    for(let i of cardData) {
-                        const order = (a,b) => {
-                            if(a.id > b.id) {
-                                return 1
-                            }
-                            else {
-                                return -1
-                            }
-                        }
-                        
-                        cardData.sort(order);
-                    }
-
-                    renderPokemons();
+                    document.querySelector('.spinner__container').style.display = 'flex';
+                    setTimeout(function(){
+                        document.querySelector('.spinner__container').style.display = 'none';
+                        allPokemonLoader();
+                    }, 2000);
                 }
             })
     }
-})
-
-// Filtrado de pokemons
-let searchInput = document.querySelector('#search');
-
-const searchPokemon = () => {
-    let searchInputValue = searchInput.value
-    console.log(searchInputValue);
-}
-
-searchInput.onkeyup = searchPokemon;
+});
