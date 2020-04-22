@@ -1,0 +1,16 @@
+.cube {
+    width: 200px;
+    height: 200px;
+    background: #2b2525;
+    position: fixed;
+    top: -100px;
+    transform: rotate(45deg);
+
+    &--left {
+        left: -102px
+    }
+
+    &--right {
+        right: -102px;
+    }
+}

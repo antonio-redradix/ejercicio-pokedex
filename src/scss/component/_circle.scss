@@ -1,0 +1,16 @@
+.circle {
+    width: 200px;
+    height: 200px;
+    background: #d32828;
+    border-radius: 50%;
+    position: fixed;
+    bottom: -90px;
+
+    &--left{
+        left: -50px
+    }
+
+    &--right {
+        right: -50px;
+    }
+}

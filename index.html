@@ -8,10 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 </head>
 <body>
+    <div class="circle circle--left"></div>
+    <div class="cube cube--left"></div>
     <section class="main">
         <header class="header">
             <input class="input input--search header__search" type="text" id="search" placeholder="Search your pokemon...">
         </header>
+        <section class="spinner__container">
+            <div class="lds-default spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        </section>
         <main class="main-container">
             <article class="card card--hidden">
                 <section class="card__image">
@@ -31,10 +36,9 @@
                     </div>
                 </section>
             </article>
-            <section class="spinner__container">
-                <div class="lds-default spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-            </section>
         </main>
     </section>
+    <div class="circle circle--right"></div>
+    <div class="cube cube--right"></div>
 </body>
 </html>

@@ -90,7 +90,7 @@ const allPokemonLoader = () => {
 }
 
 
-fetch('https://pokeapi.co/api/v2/pokemon?limit=50')
+fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
 .then(response => response.json())
     .then(data => {
     for(let pokemon of data.results){
@@ -102,6 +102,7 @@ fetch('https://pokeapi.co/api/v2/pokemon?limit=50')
                     document.querySelector('.spinner__container').style.display = 'flex';
                     setTimeout(function(){
                         document.querySelector('.spinner__container').style.display = 'none';
+                        document.querySelector('.main-container').classList.add('main-container--active');
                         allPokemonLoader();
                     }, 2000);
                 }
