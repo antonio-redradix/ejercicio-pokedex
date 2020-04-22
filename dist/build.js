@@ -183,9 +183,14 @@ function addCard(data) {
 function allPokemonLoaded() {
   cardData.sort(sorter);
   renderPokemons(cardData);
+  var snipper = document.querySelector('.lds-roller');
+  snipper.classList.add('hidden'); // hacemos que el spinner sea visible
 }
 
 function main() {
+  // hacemos que el spinner sea invisible
+  var snipper = document.querySelector('.lds-roller');
+  snipper.classList.remove('hidden');
   fetch('https://pokeapi.co/api/v2/pokemon?limit=10').then(function (response) {
     return response.json();
   }).then(function (data) {

@@ -67,9 +67,14 @@ function addCard(data){
 function allPokemonLoaded(){
     cardData.sort(sorter)
     renderPokemons(cardData)
+    const snipper = document.querySelector('.lds-roller') 
+    snipper.classList.add('hidden')// hacemos que el spinner sea visible
 }
 
 export function main(){
+                    // hacemos que el spinner sea invisible
+    const snipper = document.querySelector('.lds-roller') 
+    snipper.classList.remove('hidden')
     fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
         .then(response => response.json())
         .then(data => {
