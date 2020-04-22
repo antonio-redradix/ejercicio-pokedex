@@ -1,22 +1,36 @@
 const template = document.querySelector('.card')
 
-let cardData = []
+let cardData = [] // recoge todos los pokemon
 
 // filter stuff
 const filter = document.querySelector('.filter-input')
-filter.onkeyup = filterPokemons
+filter.onkeyup = filterPokemons   // hace que a la que pulses una tecla teniendo seleccionado el filter se dispare la funcion filterPokemons
 
-function filterPokemons(){
+function filterPokemons(){  // función para filtra los pokemon
     console.log(filter.value)
+    const filtered = cardData.filter(pokemon => {  // filtramos pokemons que encajen
+        if(pokemon.name.includes(filter.value)){
+            return true
+        } else{
+            return false
+        } 
+    })
+        clearPokemons()
+        renderPokemons(filtered)
 }
 
-function renderPokemons(){
-    cardData.forEach(data => {
+function clearPokemons(){   // función para que una vez filtrados desparezcan los demás
+    let container = document.querySelector('.container')
+    container.innerHTML = ''
+}
+
+function renderPokemons(pokemons){ //array que contiene datos de pokemon reproducir los pokemon
+    pokemons.forEach(data => {
         addCard(data)
     })
 }
 
-function sorter(a, b){
+function sorter(a, b){  //  ordena un array según la función comparativa que se aplique,
     if(a.id > b.id){
         return 1
     } else {
@@ -50,6 +64,11 @@ function addCard(data){
     return card
 }
 
+function allPokemonLoaded(){
+    cardData.sort(sorter)
+    renderPokemons(cardData)
+}
+
 export function main(){
     fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
         .then(response => response.json())
@@ -60,8 +79,7 @@ export function main(){
                     .then(pokemonData => {
                         cardData.push(pokemonData)
                         if(cardData.length === data.results.length){
-                            cardData.sort(sorter)
-                            renderPokemons()
+                            allPokemonLoaded()
                         }
                     })
             }

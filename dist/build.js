@@ -116,22 +116,42 @@ Object(_main__WEBPACK_IMPORTED_MODULE_0__["main"])();
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "main", function() { return main; });
 var template = document.querySelector('.card');
-var cardData = []; // filter stuff
+var cardData = []; // recoge todos los pokemon
+// filter stuff
 
 var filter = document.querySelector('.filter-input');
-filter.onkeyup = filterPokemons;
+filter.onkeyup = filterPokemons; // hace que a la que pulses una tecla teniendo seleccionado el filter se dispare la funcion filterPokemons
 
 function filterPokemons() {
+  // función para filtra los pokemon
   console.log(filter.value);
+  var filtered = cardData.filter(function (pokemon) {
+    // filtramos pokemons que encajen
+    if (pokemon.name.includes(filter.value)) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  clearPokemons();
+  renderPokemons(filtered);
 }
 
-function renderPokemons() {
-  cardData.forEach(function (data) {
+function clearPokemons() {
+  // función para que una vez filtrados desparezcan los demás
+  var container = document.querySelector('.container');
+  container.innerHTML = '';
+}
+
+function renderPokemons(pokemons) {
+  //array que contiene datos de pokemon reproducir los pokemon
+  pokemons.forEach(function (data) {
     addCard(data);
   });
 }
 
 function sorter(a, b) {
+  //  ordena un array según la función comparativa que se aplique,
   if (a.id > b.id) {
     return 1;
   } else {
@@ -160,6 +180,11 @@ function addCard(data) {
   return card;
 }
 
+function allPokemonLoaded() {
+  cardData.sort(sorter);
+  renderPokemons(cardData);
+}
+
 function main() {
   fetch('https://pokeapi.co/api/v2/pokemon?limit=10').then(function (response) {
     return response.json();
@@ -177,8 +202,7 @@ function main() {
           cardData.push(pokemonData);
 
           if (cardData.length === data.results.length) {
-            cardData.sort(sorter);
-            renderPokemons();
+            allPokemonLoaded();
           }
         });
       }

@@ -3,16 +3,59 @@
 body{
   background-color: #FEE445;
 }
+.triangulo-negro{
+  width: 100px;
+  height: 100px;
+  transform: rotate(135deg);
+  background-color: black;
+  position: absolute;
+  top: -50px;
+  left: -50px;
+}
+
+.triangulo-negro2{
+  width: 100px;
+  height: 100px;
+  transform: rotate(135deg);
+  background-color: black;
+  position: absolute;
+  top: -50px;
+  right: -50px;
+}
+
+.circulo-rojo{
+  width: 100px;
+  height: 100px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background: red;
+  position: fixed;
+  bottom: -50px;
+  left: -50px;
+}
+
+.circulo-rojo2{
+    width: 100px;
+    height: 100px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: red;
+    position: fixed;
+    bottom: -50px;
+    right: -50px;
+}
 
 .container{
   width: 950px;
   position: absolute;
   left: 50%;
   transform: translate(-50%);
-  margin-top: 50px;
 }
 
 .filter-input{
+  margin-top: 40px;
   text-align: center;
   background-color: rgb(255, 255, 255);
   padding: 20px;
