@@ -116,17 +116,50 @@ Object(_main__WEBPACK_IMPORTED_MODULE_0__["main"])();
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "main", function() { return main; });
 var template = document.querySelector('.card');
+var cardData = [];
+var filter = document.querySelector('.filter-input');
+filter.onkeyup = filterPokemons;
+
+function filterPokemons() {
+  var filtered = cardData.filter(function (pokemon) {
+    if (pokemon.name.includes(filter.value)) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  clearPokemons();
+  renderPokemons(filtered);
+}
+
+function clearPokemons() {
+  var container = document.querySelector('.container');
+  container.innerHTML = '';
+}
+
+function renderPokemons(pokemons) {
+  //array que contiene datos de pokemon
+  pokemons.forEach(function (data) {
+    addCard(data);
+  });
+}
+
+function sorter(a, b) {
+  if (a.id > b.id) {
+    return 1;
+  } else {
+    return -1;
+  }
+}
 
 function addCard(data) {
   var card = template.cloneNode(true);
   document.querySelector('.container').appendChild(card);
-  card.classList.remove('hidden'); // rellenar
-
+  card.classList.remove('hidden');
   var nameNode = card.querySelector('.name-pokemon');
   nameNode.innerHTML = data.name;
   var imgNode = card.querySelector('.card-img');
   imgNode.src = data.sprites.front_default;
-  console.log('id', data.id);
   var idNode = card.querySelector('.card-id');
   idNode.innerHTML = data.id;
   var typeNode = card.querySelector('.type-pokemon');
@@ -140,12 +173,46 @@ function addCard(data) {
   return card;
 }
 
+function allPokemonLoaded() {
+  cardData.sort(sorter);
+  renderPokemons(cardData);
+}
+
 function main() {
-  fetch('https://pokeapi.co/api/v2/pokemon/bulbasaur/').then(function (response) {
+  fetch('https://pokeapi.co/api/v2/pokemon?limit=10').then(function (response) {
     return response.json();
   }).then(function (data) {
-    console.log(data);
-    addCard(data);
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = data.results[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var pokemon = _step.value;
+        fetch(pokemon.url).then(function (response) {
+          return response.json();
+        }).then(function (pokemonData) {
+          cardData.push(pokemonData);
+
+          if (cardData.length === data.results.length) {
+            allPokemonLoaded();
+          }
+        });
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return != null) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
   });
 }
 

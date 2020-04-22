@@ -1,18 +1,53 @@
 const template = document.querySelector('.card')
 
+let cardData = []
+
+const filter = document.querySelector('.filter-input')
+filter.onkeyup = filterPokemons
+
+function filterPokemons(){
+    const filtered = cardData.filter(pokemon => {
+        if(pokemon.name.includes(filter.value)){
+            return true
+        } else {
+            return false
+        }
+    })
+
+    clearPokemons()
+    renderPokemons(filtered)
+}
+
+function clearPokemons(){
+    let container = document.querySelector('.container')
+    container.innerHTML = ''
+}
+
+function renderPokemons(pokemons){ //array que contiene datos de pokemon
+    pokemons.forEach(data => {
+        addCard(data)
+    })
+}
+
+function sorter(a, b){
+    if(a.id > b.id){
+        return 1
+    } else {
+        return -1
+    }
+}
+
 function addCard(data){
     const card = template.cloneNode(true)
     document.querySelector('.container').appendChild(card)
     card.classList.remove('hidden')
 
-    // rellenar
     let nameNode = card.querySelector('.name-pokemon')
     nameNode.innerHTML = data.name
 
     let imgNode = card.querySelector('.card-img')
     imgNode.src = data.sprites.front_default
 
-    console.log('id', data.id)
     let idNode = card.querySelector('.card-id')
     idNode.innerHTML = data.id
 
@@ -28,11 +63,25 @@ function addCard(data){
     return card
 }
 
+function allPokemonLoaded(){
+    cardData.sort(sorter)
+    renderPokemons(cardData)
+}
+
 export function main(){
-    fetch('https://pokeapi.co/api/v2/pokemon/bulbasaur/')
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
         .then(response => response.json())
         .then(data => {
-            console.log(data)
-            addCard(data)
+            for(let pokemon of data.results){
+                fetch(pokemon.url)
+                    .then(response => response.json())
+                    .then(pokemonData => {
+                        cardData.push(pokemonData)
+                        if(cardData.length === data.results.length){
+                            allPokemonLoaded()
+                        }
+                    })
+            }
         })
+
 }
